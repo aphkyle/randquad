@@ -28,6 +28,11 @@ let genRand = (a, b, c, d) => {
     console.log(ax, by, cx, dy)
     console.log(dn, en)
 
+    let res = `${ax*cx}x^2+${ax*dy + by*cx}xy+${by * dy}y^2`.replace(/(?<!\d)1([xy])/g, "$1").replace(/(\+\-|\-\+)/g, "-")
+    if (res.includes("0xy")){
+        return genRand(a, b, c, d)
+    }
+
     if (dn * en === 1){
         ans.push(`(${ax}x+${by}y)(${cx}x+${dy}y)`.replace(/(?<!\d)1([xy])/g, "$1").replace(/(\+\-|\-\+)/g, "-"))
         ans.push(`(${by}y+${ax}x)(${dy}y+${cx}x)`.replace(/(?<!\d)1([xy])/g, "$1").replace(/(\+\-|\-\+)/g, "-"))
@@ -57,11 +62,7 @@ let genRand = (a, b, c, d) => {
         ans.push(`${dn*en}(${cx}x+${dy}y)(${ax}x+${by}y)`.replace(/(?<!\d)1([xy])/g, "$1").replace(/(\+\-|\-\+)/g, "-"))
         ans.push(`${dn*en}(${dy}y+${cx}x)(${by}y+${ax}x)`.replace(/(?<!\d)1([xy])/g, "$1").replace(/(\+\-|\-\+)/g, "-"))
     }
-    let res = `${ax*cx}x^2+${ax*dy + by*cx}xy+${by * dy}y^2`.replace(/(?<!\d)1([xy])/g, "$1").replace(/(\+\-|\-\+)/g, "-")
-    if (res.includes("0xy")){
-        return genRand(a, b, c, d)
-    }
-    
+
     console.log(ans)
     console.log(res)
 
